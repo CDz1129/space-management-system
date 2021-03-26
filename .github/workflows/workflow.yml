@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Docker Hub Sign-in
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_REPO }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Building Docker Image
         run: docker build -t $REPO:latest -t $REPO:${GITHUB_RUN_ID} .
       - name: Publish Docker Image
@@ -43,8 +43,9 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            docker login -u ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_REPO }} -p ${{ secrets.DOCKER_PASSWORD }}
             docker container stop ${GITHUB_RUN_ID}
+            docker container rm ${GITHUB_RUN_ID}
             docker pull ${GITHUB_RUN_ID}
             docker run ${GITHUB_RUN_ID}
 
