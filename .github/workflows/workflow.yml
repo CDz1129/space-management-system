@@ -6,25 +6,24 @@ on:
       - 'master'
 
 jobs:
+#   test:
+#     name: Unit-Test
+#     runs-on: ubuntu-latest
 
-  test:
-    name: Unit-Test
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v1
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-      - name: Maven Package
-        run: mvn -B clean package
-      - name: Maven Verify
-        run: mvn -B clean verify -DskipTests
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: Set up JDK
+#         uses: actions/setup-java@v1
+#         with:
+#           java-version: 1.8
+#       - name: Maven Package
+#         run: mvn -B clean package
+#       - name: Maven Verify
+#         run: mvn -B clean verify -DskipTests
   docker:
     name: Publish Docker Image
     runs-on: ubuntu-latest
-    needs: [test]
+#     needs: [test]
     env:
       IMGE_NAME: ${{ secrets.DOCKER_REPO }}/${{ secrets.DOCKER_USERNAME }}/test-github-action:1.0.0-test
     steps:
@@ -33,7 +32,7 @@ jobs:
         uses: docker/login-action@v1.8.0
         with:
           # Server address of Docker registry. If not set then will default to Docker Hub
-          registry: ${{ secrets.DOCKER_REPO }}
+#           registry: ${{ secrets.DOCKER_REPO }}
           # Username used to log against the Docker registry
           username: ${{ secrets.DOCKER_USERNAME }}
           # Password or personal access token used to log against the Docker registry
@@ -44,7 +43,7 @@ jobs:
         uses: docker/build-push-action@v2.3.0
         with:
           push: true
-          tags: test-github-action:1.0.0-test
+          tags: smartcdz/github:test-github-action:1.0.0-test
           
         
         
