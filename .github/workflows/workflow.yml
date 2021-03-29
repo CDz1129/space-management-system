@@ -49,7 +49,5 @@ jobs:
         uses: docker/build-push-action@v2.3.0
         with:
           push: true
-          tags: test-github-action:1.0.0-test
-          
-        
+          tags: smartcdz/github:test-github-action:1.0.0-test
         
