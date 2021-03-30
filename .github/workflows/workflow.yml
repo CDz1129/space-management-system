@@ -37,7 +37,7 @@ jobs:
       - name: Docker Hub Sign-in
         uses: docker/login-action@v1.8.0
         with:
-          # Server address of Docker registry. If not set then will default to Docker Hub
+          # Server address of Docker registry. If not set then will default to Docker Hub 
 #           registry: ${{ secrets.DOCKER_REPO }}
           # Username used to log against the Docker registry
           username: ${{ secrets.DOCKER_USERNAME }}
