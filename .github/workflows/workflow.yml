@@ -44,7 +44,7 @@ jobs:
         # uses: docker/build-push-action@9379083e426e2e84abb80c8c091f5cdeb7d3fd7a
         uses: docker/build-push-action@v2.3.0
         with:
-          tags: $REPO_NAME/$TAG_NAME
+          tags: ${REPO_NAME}/${TAG_NAME}
           push: true
 
       - name: executing remote ssh commands using password
@@ -58,8 +58,8 @@ jobs:
             echo ${{ secrets.DOCKER_PASSWORD }} | docker login ${{ secrets.DOCKER_REPO }} -u ${{ secrets.DOCKER_USERNAME }} --password-stdin 
             docker container stop im-core > /dev/null 2>&1 && echo 'stop container' || echo 'nothing to stop'
             docker container rm im-core > /dev/null 2>&1 && echo 'removed container' || echo 'nothing to remove'
-            docker pull $REPO_NAME/$TAG_NAME
-            docker run $REPO_NAME/$TAG_NAME
+            docker pull ${REPO_NAME}/${TAG_NAME}
+            docker run ${REPO_NAME}/${TAG_NAME}
         
           
         
